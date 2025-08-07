@@ -330,10 +330,3 @@ This project is licensed under the **MIT License** - see [LICENSE](LICENSE) for 
 </div>
 """
 
-print("✅ Complete project files generated!")
-print("\nTo run the project:")
-print("1. Create the files and directories as shown above")
-print("2. Install dependencies: pip install -r requirements.txt") 
-print("3. Train models: python scripts/train_model.py")
-print("4. Start API: uvicorn src.api.app:app --reload")
-print("5. Visit: http://localhost:8000/docs")
