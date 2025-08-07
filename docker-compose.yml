@@ -1,0 +1,38 @@
+
+version: '3.8'
+
+services:
+  forex-ml-api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./config:/app/config
+    environment:
+      - PYTHONPATH=/app
+      - LOG_LEVEL=INFO
+    restart: unless-stopped
+
+  jupyter:
+    build: .
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/app/notebooks
+      - ./data:/app/data
+      - ./src:/app/src
+    command: jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+    restart: unless-stopped
+
+  streamlit:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./src:/app/src
+      - ./models:/app/models
+      - ./data:/app/data
+    command: streamlit run src/dashboard/app.py --server.address=0.0.0.0
+    restart: unless-stopped
